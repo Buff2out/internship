@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class StudentsListDto {
 
-    String id;
+    Integer studentId;
 
     String name;
 
