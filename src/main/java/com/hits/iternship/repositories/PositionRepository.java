@@ -13,4 +13,7 @@ public interface PositionRepository extends JpaRepository<PositionEntity, Intege
 
     List<PositionEntity> findPositionEntitiesByCompanies(CompanyEntity companyEntity);
 
+    PositionEntity findPositionEntityByPositionId(Integer positionId);
+
+
 }

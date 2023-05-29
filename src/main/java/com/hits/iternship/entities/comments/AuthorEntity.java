@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "comments_authors")
+@Table(name = "authors")
 public class AuthorEntity {
 
     @Id
@@ -15,4 +15,5 @@ public class AuthorEntity {
     String name;
 
     String image;
+
 }

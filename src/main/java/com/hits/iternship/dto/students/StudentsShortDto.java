@@ -1,15 +1,17 @@
 package com.hits.iternship.dto.students;
 
+import com.hits.iternship.dto.StatusDto;
 import lombok.Data;
 
 import java.util.Date;
 @Data
 public class StudentsShortDto {
 
-     String id;
+     Integer studentId;
+
      String name;
 
-     String status;
+     StatusDto status;
 
-      Date lastActivity;
+     Date lastActivity;
 }
