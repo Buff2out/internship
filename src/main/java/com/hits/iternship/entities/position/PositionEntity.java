@@ -22,7 +22,7 @@ public class PositionEntity {
     public void setName(String name) {
         this.name = name;
     }
-
+//
     int plan;
 
     public void setPlan(int plan) {
@@ -34,13 +34,17 @@ public class PositionEntity {
     public void setTaken(int taken) {
         this.taken = taken;
     }
+//
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "positionsId", referencedColumnName = "positionId")
+//    List<CompanyEntity> companies;
+//
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "positionsId", referencedColumnName = "positionId")
+//    List<StudentEntity> students;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "positionsId", referencedColumnName = "positionId")
-    List<CompanyEntity> companies;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "positionsId", referencedColumnName = "positionId")
-    List<StudentEntity> students;
+    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
+    List<PositionCompanyEntity> positionCompanyEntities;
 
 }

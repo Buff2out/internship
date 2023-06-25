@@ -10,7 +10,7 @@ public interface PositionRepository extends JpaRepository<PositionEntity, Intege
 
     List<PositionEntity> findAll();
 
-    List<PositionEntity> findPositionEntitiesByCompanies(CompanyEntity companyEntity);
+//    List<PositionEntity> findPositionEntitiesByCompanies(CompanyEntity companyEntity);
 
     PositionEntity findPositionEntityByPositionId(Integer positionId);
 

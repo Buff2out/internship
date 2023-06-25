@@ -27,7 +27,7 @@ public class InterviewEntity {
 //    List<CompanyEntity> companies;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
+    @JoinColumn(name = "positionCompanyId", referencedColumnName = "positionCompanyId")
     PositionCompanyEntity position;
 
     @ManyToOne(fetch = FetchType.LAZY)

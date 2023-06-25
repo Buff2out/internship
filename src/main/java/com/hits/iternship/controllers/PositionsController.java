@@ -5,7 +5,7 @@ import com.hits.iternship.entities.position.PositionEntity;
 import com.hits.iternship.repositories.PositionCompanyRepository;
 import com.hits.iternship.repositories.PositionRepository;
 import com.hits.iternship.service.CompanyService;
-import com.hits.iternship.service.PositionService;
+//import com.hits.iternship.service.PositionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PositionsController {
 
-    private final PositionService positionService;
+//    private final PositionService positionService;
 
     private final CompanyService companyService;
 
@@ -36,7 +36,7 @@ public class PositionsController {
 //    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @GetMapping()
+//    @GetMapping()
     //public PositionsAllDto getAllPositions(@RequestBody PlanTakenDto planTakenDto) {
 //    public PositionsAllDto getAllPositions() {
 //
@@ -52,29 +52,19 @@ public class PositionsController {
 //        pos.setPositions(positionsListDtos);
 //        return pos;
 //    }
-    public PositionsAllDto getAllPositions() {
-
-        List<PositionsListDto> positionsListDtos =   positionService.findAllPositions(); //Вернулся лист дтошек ПОЗИТИОНС ЛИСТ
-
-        PositionsAllDto pos = new PositionsAllDto();
-        //  pos.setPlan(planTakenDto.getPlan());
-        //  pos.setTaken(planTakenDto.getTaken());
-
-        pos.setPlan(50);
-        pos.setTaken(20);
-
-        pos.setPositions(positionsListDtos);
-        return pos;
+    @GetMapping()
+    public List<PositionEntity> getAllPositions() {
+        return positionRepository.findAll();
     }
     @PostMapping()
     public List<PositionEntity> addNewPosition(@RequestBody PositionAddNewDto positionAddNewDto) {
         PositionEntity positionEntity = new PositionEntity();
         positionEntity.setName(positionAddNewDto.getName());
-        positionEntity.setPlan(0);
-        positionEntity.setTaken(0);
+//        positionEntity.setPlan(0);
+//        positionEntity.setTaken(0);
         positionRepository.save(positionEntity);
-        List<PositionEntity> positionEntities =  positionRepository.findAll();
-        return positionEntities;
+        List<PositionEntity> res = positionRepository.findAll();
+        return res;
     }
 
 }

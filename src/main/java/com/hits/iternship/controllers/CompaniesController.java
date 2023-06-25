@@ -10,10 +10,11 @@ import com.hits.iternship.entities.companies.CompanyEntity;
 import com.hits.iternship.entities.companies.RepresentativesEntity;
 import com.hits.iternship.entities.interviews.InterviewEntity;
 import com.hits.iternship.entities.position.PositionCompanyEntity;
+import com.hits.iternship.entities.position.PositionEntity;
 import com.hits.iternship.entities.students.StudentEntity;
 import com.hits.iternship.repositories.*;
 import com.hits.iternship.service.CompanyService;
-import com.hits.iternship.service.PositionService;
+//import com.hits.iternship.service.PositionService;
 import com.hits.iternship.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +37,7 @@ public class CompaniesController {
 
     private final CompanyService companyService;
 
-    private final PositionService positionService;
+//    private final PositionService positionService;
 
     private final StudentService studentService;
 
@@ -56,6 +57,7 @@ public class CompaniesController {
     private final StudentRepository studentRepository;
 
     private final PositionCompanyRepository positionCompanyRepository;
+    private final PositionRepository positionRepository;
 
     private final InterviewRepository interviewRepository;
     private final CommentRepository commentRepository;
@@ -117,111 +119,120 @@ public class CompaniesController {
         return companyRepository.findCompanyEntityByCompanyId(companyId);
     }
 
-    @GetMapping("/{companyId}/positions")
-    //public PositionsAllFonOneCompanyDto getPositionsForOneCompany(@PathVariable Integer companyId) {
-    public PositionsAllFonOneCompanyDto getPositionsForOneCompany(@PathVariable Integer companyId) {
-        List<StudentEntity> studentEntityList = studentRepository.findAll();
-        CompanyEntity companyEntity = companyRepository.findCompanyEntityByCompanyId(companyId);
-
-        List<StudentsShortDto> studentsShortDto = studentService.findAllShortStudents();
-        List<PositionsListForOneCompany> positionsListDtos = positionService.findPositionsForOneCompany(companyId); //Вернулся лист дтошек ПОЗИТИОНС ЛИСТ
-        List<StudentsShortDto> studentsShortFilterDto = new ArrayList<>();
-
-        Integer correct_studId;
-        Integer correct_posId;
-        List<Integer> studPositionIdList = new ArrayList<>();
-        List<Integer> companyPositionIdList = new ArrayList<>();
-        List<Integer> studentsIdFiltret = new ArrayList<>();
-
-        for (PositionsListForOneCompany temp_posforOneCompany : positionsListDtos
-        ) {
-            Integer positionId = temp_posforOneCompany.getPositionId();
-            companyPositionIdList.add(positionId); // id позиций НАШЕЙ КОМПАНИИ
-        }
-
-        for (StudentEntity temp_stud : studentEntityList
-        ) {
-            /*
-            for (PositionsListForOneCompany temp_posforOneCompany : positionsListDtos
-            ) {
-                Integer positionId = temp_posforOneCompany.getPositionId();
-                companyPositionIdList.add(positionId); // id позиций НАШЕЙ КОМПАНИИ
-            }
-            */
-
-            List<PositionCompanyEntity> position_list = temp_stud.getPositions();
-            for (PositionCompanyEntity temp2 : position_list
-            ) {
-
-                //studentsIdFiltret.add();
-                studPositionIdList.add(temp2.getPositionId()); // это id всех позиций конкретного студента
-            }// нам нужно успеть спомощью листа studPositionIdList отфильтровать студентов и тут же очистить лист
-            Integer companyPositionIdListSize = companyPositionIdList.size();
-            Integer studPositionIdListSize = studPositionIdList.size();
-
-            Integer bigestSize;
-            Integer smolestSize;
-            if(companyPositionIdListSize > studPositionIdListSize) {
-                bigestSize = companyPositionIdListSize;
-                smolestSize = studPositionIdListSize;
-            }
-            else {
-                bigestSize = studPositionIdListSize;
-                smolestSize = companyPositionIdListSize;
-            }
-
-            for (int i = 0; i < smolestSize; i++){
-                for (int j = 0; j < smolestSize; j++){
-                    if(companyPositionIdList.get(i) == studPositionIdList.get(j)){
-                        StudentsShortDto tempStudentShortDto = studentService.findShortStudents(temp_stud);
-                        studentsShortFilterDto.add(tempStudentShortDto);
-                    }
-                }
-            }
-
-
-            studPositionIdList = null;
-        }
-        for (PositionsListForOneCompany temp4 :positionsListDtos) {
-            temp4.setStudents(studentsShortFilterDto);
-        }
-
-
-        List<StudentsShortDto> studentsShortForOneCompany = new ArrayList<>();
-
-
-        PositionsAllFonOneCompanyDto pos = new PositionsAllFonOneCompanyDto();
-        pos.setPlan(15);
-        pos.setTaken(5);
-        pos.setPositions(positionsListDtos);
-        //pos.set
-/*
-        PositionsAllFonOneCompanyDto positionsAllFonOneCompanyDto = new PositionsAllFonOneCompanyDto();
-
-        return positionsAllFonOneCompanyDto;
-
- */
-        return pos;
-    }
-    @PostMapping("/{id}/position")
-    public PositionCompanyAddNewDto addPosition(@PathVariable Integer id, @RequestBody PositionCompanyAddNewDto positionCompanyAddNewDto) {
+//    @GetMapping("/{companyId}/positions")
+//    //public PositionsAllFonOneCompanyDto getPositionsForOneCompany(@PathVariable Integer companyId) {
+//    public PositionsAllFonOneCompanyDto getPositionsForOneCompany(@PathVariable Integer companyId) {
+////        List<StudentEntity> studentEntityList = studentRepository.findAll();
+////        CompanyEntity companyEntity = companyRepository.findCompanyEntityByCompanyId(companyId);
+////
+////        List<StudentsShortDto> studentsShortDto = studentService.findAllShortStudents();
+////        List<PositionsListForOneCompany> positionsListDtos = positionService.findPositionsForOneCompany(companyId); //Вернулся лист дтошек ПОЗИТИОНС ЛИСТ
+////        List<StudentsShortDto> studentsShortFilterDto = new ArrayList<>();
+////
+////        Integer correct_studId;
+////        Integer correct_posId;
+////        List<Integer> studPositionIdList = new ArrayList<>();
+////        List<Integer> companyPositionIdList = new ArrayList<>();
+////        List<Integer> studentsIdFiltret = new ArrayList<>();
+////
+////        for (PositionsListForOneCompany temp_posforOneCompany : positionsListDtos
+////        ) {
+////            Integer positionId = temp_posforOneCompany.getPositionId();
+////            companyPositionIdList.add(positionId); // id позиций НАШЕЙ КОМПАНИИ
+////        }
+////
+////        for (StudentEntity temp_stud : studentEntityList
+////        ) {
+////            /*
+////            for (PositionsListForOneCompany temp_posforOneCompany : positionsListDtos
+////            ) {
+////                Integer positionId = temp_posforOneCompany.getPositionId();
+////                companyPositionIdList.add(positionId); // id позиций НАШЕЙ КОМПАНИИ
+////            }
+////            */
+////
+////            List<PositionCompanyEntity> position_list = temp_stud.getPositions();
+////            for (PositionCompanyEntity temp2 : position_list
+////            ) {
+////
+////                //studentsIdFiltret.add();
+////                studPositionIdList.add(temp2.getPositionId()); // это id всех позиций конкретного студента
+////            }// нам нужно успеть спомощью листа studPositionIdList отфильтровать студентов и тут же очистить лист
+////            Integer companyPositionIdListSize = companyPositionIdList.size();
+////            Integer studPositionIdListSize = studPositionIdList.size();
+////
+////            Integer bigestSize;
+////            Integer smolestSize;
+////            if(companyPositionIdListSize > studPositionIdListSize) {
+////                bigestSize = companyPositionIdListSize;
+////                smolestSize = studPositionIdListSize;
+////            }
+////            else {
+////                bigestSize = studPositionIdListSize;
+////                smolestSize = companyPositionIdListSize;
+////            }
+////
+////            for (int i = 0; i < smolestSize; i++){
+////                for (int j = 0; j < smolestSize; j++){
+////                    if(companyPositionIdList.get(i) == studPositionIdList.get(j)){
+////                        StudentsShortDto tempStudentShortDto = studentService.findShortStudents(temp_stud);
+////                        studentsShortFilterDto.add(tempStudentShortDto);
+////                    }
+////                }
+////            }
+////
+////
+////            studPositionIdList = null;
+////        }
+////        for (PositionsListForOneCompany temp4 :positionsListDtos) {
+////            temp4.setStudents(studentsShortFilterDto);
+////        }
+////
+////
+////        List<StudentsShortDto> studentsShortForOneCompany = new ArrayList<>();
+////
+////
+////        PositionsAllFonOneCompanyDto pos = new PositionsAllFonOneCompanyDto();
+////        pos.setPlan(15);
+////        pos.setTaken(5);
+////        pos.setPositions(positionsListDtos);
+////        //pos.set
+/////*
+////        PositionsAllFonOneCompanyDto positionsAllFonOneCompanyDto = new PositionsAllFonOneCompanyDto();
+////
+////        return positionsAllFonOneCompanyDto;
+////
+//// */
+////        return pos;
+//
+//    }
+//    @GetMapping("/{companyId}/positions")
+//    public PositionEntity getPositionsForOneCompany(@PathVariable Integer companyId) {
+//        PositionEntity positionEntity =
+//
+//    }
+    @PostMapping("/{id}/positions")
+    public List<PositionCompanyEntity> addPosition(@PathVariable Integer id, @RequestBody PositionCompanyAddNewDto positionCompanyAddNewDto) {
         PositionCompanyEntity positionCompanyEntity = new PositionCompanyEntity();
-//        positionCompanyEntity.setName(positionCompanyAddNewDto.getPositionTypeId());
+        Integer positionId = positionCompanyAddNewDto.getPositionTypeId();
+        positionCompanyEntity.setPositionEntity(positionRepository.findPositionEntityByPositionId(positionId));
+        positionCompanyEntity.setCompany(companyRepository.findCompanyEntityByCompanyId(id));
         positionCompanyEntity.setPlan(positionCompanyAddNewDto.getPlan());
-        List<CompanyEntity> companyEntities = new ArrayList<>();
-        companyEntities.add(companyRepository.findCompanyEntityByCompanyId(id));
-        positionCompanyEntity.setCompanies(companyEntities);
+//        List<CompanyEntity> companyEntities = new ArrayList<>();
+//        companyEntities.add(companyRepository.findCompanyEntityByCompanyId(id));
+//        positionCompanyEntity.setCompanies(companyEntities);
 //        PositionCompanyEntity positionCompanyEntity = positionService.createPosition(positionCompanyAddNewDto);
         positionCompanyRepository.save(positionCompanyEntity);
-        return positionCompanyAddNewDto;
+        List<PositionCompanyEntity> res = positionCompanyRepository.findAll();
+        return res;
     }
 
 
-    @PostMapping("/{companyId}/positions/{positionId}")
-    public InterviewOnCreateDto addInterview(@PathVariable Integer companyId, @PathVariable Integer positionId, @RequestBody InterviewOnCreateDto interviewOnCreateDto) {
+    @PostMapping("/{companyId}/positions/{positionCompanyId}")
+    public InterviewOnCreateDto addInterview(@PathVariable Integer companyId, @PathVariable Integer positionCompanyId, @RequestBody InterviewOnCreateDto interviewOnCreateDto) {
         InterviewEntity interviewEntity = new InterviewEntity();
         interviewEntity.setCompany(companyRepository.findCompanyEntityByCompanyId(companyId));
-        interviewEntity.setPosition(positionCompanyRepository.findPositionEntityByPositionId(positionId));
+        interviewEntity.setPosition(positionCompanyRepository.findPositionCompanyEntityByPositionCompanyId(positionCompanyId));
         //System.out.println(interviewOnCreateDto.getStudentId());
         interviewEntity.setStudent(studentRepository.findStudentEntityByStudentId(interviewOnCreateDto.getStudentId()));
         //interviewEntity.setStatus(statusRepository.findStatusEntityByStatusId(2).getStatus());
