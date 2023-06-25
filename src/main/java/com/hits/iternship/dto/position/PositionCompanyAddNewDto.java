@@ -1,11 +1,7 @@
 package com.hits.iternship.dto.position;
 
-import lombok.Data;
-
-import java.util.List;
-
-public class PositionAddNewDto {
-    String postionTypeId;
+public class PositionCompanyAddNewDto {
+    Integer postionTypeId;
 
     public String getPostionTypeId() {
         return postionTypeId;

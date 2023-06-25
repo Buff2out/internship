@@ -1,11 +1,9 @@
 package com.hits.iternship.controllers;
 
 import com.hits.iternship.dto.comments.CommentOnCreateDto;
-import com.hits.iternship.dto.companies.CompanyFullDto;
 import com.hits.iternship.dto.companies.CompanyShortDto;
 import com.hits.iternship.dto.interview.InterviewOnCreateDto;
 import com.hits.iternship.dto.position.*;
-import com.hits.iternship.dto.students.StudentsListDto;
 import com.hits.iternship.dto.students.StudentsShortDto;
 import com.hits.iternship.entities.comments.CommentEntity;
 import com.hits.iternship.entities.companies.CompanyEntity;
@@ -25,7 +23,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Validated
 @RestController
@@ -207,16 +204,16 @@ public class CompaniesController {
         return pos;
     }
     @PostMapping("/{id}/position")
-    public PositionAddNewDto addPosition(@PathVariable Integer id, @RequestBody PositionAddNewDto positionAddNewDto) {
+    public PositionCompanyAddNewDto addPosition(@PathVariable Integer id, @RequestBody PositionCompanyAddNewDto positionCompanyAddNewDto) {
         PositionEntity positionEntity = new PositionEntity();
-        positionEntity.setName(positionAddNewDto.getPostionTypeId());
-        positionEntity.setPlan(positionAddNewDto.getPlan());
+        positionEntity.setName(positionCompanyAddNewDto.getPostionTypeId());
+        positionEntity.setPlan(positionCompanyAddNewDto.getPlan());
         List<CompanyEntity> companyEntities = new ArrayList<>();
         companyEntities.add(companyRepository.findCompanyEntityByCompanyId(id));
         positionEntity.setCompanies(companyEntities);
-//        PositionEntity positionEntity = positionService.createPosition(positionAddNewDto);
+//        PositionEntity positionEntity = positionService.createPosition(positionCompanyAddNewDto);
         positionRepository.save(positionEntity);
-        return positionAddNewDto;
+        return positionCompanyAddNewDto;
     }
 
 
