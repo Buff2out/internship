@@ -15,6 +15,7 @@ import java.util.List;
 
 @Validated
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/positions")
 @RequiredArgsConstructor
 public class PositionsController {
@@ -25,24 +26,38 @@ public class PositionsController {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private final PositionRepository positionRepository;
-    @PostMapping("/addPostion")
-    public PositionEntity addPosition(@RequestBody CreatePositionTypeDto createPositionTypeDtoEntity) {
-
-        PositionEntity positionEntity = positionService.createPosition(createPositionTypeDtoEntity);
-
-        return positionRepository.save(positionEntity);
-    }
+//    @PostMapping("/addPostion")
+//    public PositionEntity addPosition(@RequestBody CreatePositionTypeDto createPositionTypeDtoEntity) {
+//
+//        PositionEntity positionEntity = positionService.createPosition(createPositionTypeDtoEntity);
+//
+//        return positionRepository.save(positionEntity);
+//    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @GetMapping()
     //public PositionsAllDto getAllPositions(@RequestBody PlanTakenDto planTakenDto) {
+//    public PositionsAllDto getAllPositions() {
+//
+//        List<PositionsListDto> positionsListDtos =   positionService.findAllPositions(); //Вернулся лист дтошек ПОЗИТИОНС ЛИСТ
+//
+//        PositionsAllDto pos = new PositionsAllDto();
+//      //  pos.setPlan(planTakenDto.getPlan());
+//      //  pos.setTaken(planTakenDto.getTaken());
+//
+//        pos.setPlan(50);
+//        pos.setTaken(20);
+//
+//        pos.setPositions(positionsListDtos);
+//        return pos;
+//    }
     public PositionsAllDto getAllPositions() {
 
         List<PositionsListDto> positionsListDtos =   positionService.findAllPositions(); //Вернулся лист дтошек ПОЗИТИОНС ЛИСТ
 
         PositionsAllDto pos = new PositionsAllDto();
-      //  pos.setPlan(planTakenDto.getPlan());
-      //  pos.setTaken(planTakenDto.getTaken());
+        //  pos.setPlan(planTakenDto.getPlan());
+        //  pos.setTaken(planTakenDto.getTaken());
 
         pos.setPlan(50);
         pos.setTaken(20);

@@ -43,7 +43,7 @@ public class StudentEntity {
 
 
     /////////////////////////////////////////////
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "studentId", referencedColumnName = "studentId")
     List<InterviewEntity> interviews;
 

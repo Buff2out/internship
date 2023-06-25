@@ -1,5 +1,6 @@
 package com.hits.iternship.entities.comments;
 
+import com.hits.iternship.entities.interviews.InterviewEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,8 +19,13 @@ public class CommentEntity {
 
     //    String interviewId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "authorId", referencedColumnName = "authorId")
-    AuthorEntity author;
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    UserEntity user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "interviewId", referencedColumnName = "interviewId")
+    InterviewEntity interviewEntity;
+
     Date timestamp;
 
     String text;

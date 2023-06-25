@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class CommentDto {
 
-    AuthorDto author;
+    UserDto user;
 
     Date timestamp;
 

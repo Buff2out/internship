@@ -18,7 +18,7 @@ public class CommentsEntity {
 
     String interviewId;
 
-    //List<AuthorEntity> authors;
+    //List<UserEntity> users;
 
     Date timestamp;
 

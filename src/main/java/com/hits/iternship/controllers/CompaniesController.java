@@ -1,11 +1,13 @@
 package com.hits.iternship.controllers;
 
+import com.hits.iternship.dto.comments.CommentOnCreateDto;
 import com.hits.iternship.dto.companies.CompanyFullDto;
 import com.hits.iternship.dto.companies.CompanyShortDto;
 import com.hits.iternship.dto.interview.InterviewOnCreateDto;
 import com.hits.iternship.dto.position.*;
 import com.hits.iternship.dto.students.StudentsListDto;
 import com.hits.iternship.dto.students.StudentsShortDto;
+import com.hits.iternship.entities.comments.CommentEntity;
 import com.hits.iternship.entities.companies.CompanyEntity;
 import com.hits.iternship.entities.companies.RepresentativesEntity;
 import com.hits.iternship.entities.interviews.InterviewEntity;
@@ -19,12 +21,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Validated
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/companies")
 @RequiredArgsConstructor
 public class CompaniesController {
@@ -56,8 +61,9 @@ public class CompaniesController {
     private final PositionRepository positionRepository;
 
     private final InterviewRepository interviewRepository;
+    private final CommentRepository commentRepository;
 
-    @PostMapping("/addCompany")
+    @PostMapping()
     public CompanyEntity addCompany(@RequestBody CompanyEntity companyEntity){
         /*
         CompanyEntity companyEntity = new CompanyEntity();
@@ -91,7 +97,7 @@ public class CompaniesController {
     }
 
 
-    @PostMapping("/addRepresentative")
+    @PostMapping("/representative")
     public RepresentativesEntity addRepresentative(@RequestBody RepresentativesEntity representativesEntity ){
     /*
         RepresentativesEntity representativesEntity = new RepresentativesEntity();
@@ -110,8 +116,8 @@ public class CompaniesController {
     }
 
     @GetMapping("/{companyId}")
-    public List<CompanyFullDto> getCompanyById(@PathVariable Integer companyId){
-        return companyService.findCompanyById(companyId);
+    public CompanyEntity getCompanyById(@PathVariable Integer companyId){
+        return companyRepository.findCompanyEntityByCompanyId(companyId);
     }
 
     @GetMapping("/{companyId}/positions")
@@ -200,6 +206,18 @@ public class CompaniesController {
  */
         return pos;
     }
+    @PostMapping("/{id}/position")
+    public PositionAddNewDto addPosition(@PathVariable Integer id, @RequestBody PositionAddNewDto positionAddNewDto) {
+        PositionEntity positionEntity = new PositionEntity();
+        positionEntity.setName(positionAddNewDto.getPostionTypeId());
+        positionEntity.setPlan(positionAddNewDto.getPlan());
+        List<CompanyEntity> companyEntities = new ArrayList<>();
+        companyEntities.add(companyRepository.findCompanyEntityByCompanyId(id));
+        positionEntity.setCompanies(companyEntities);
+//        PositionEntity positionEntity = positionService.createPosition(positionAddNewDto);
+        positionRepository.save(positionEntity);
+        return positionAddNewDto;
+    }
 
 
     @PostMapping("/{companyId}/positions/{positionId}")
@@ -213,6 +231,20 @@ public class CompaniesController {
         //interviewEntity.setComments([]);
         interviewRepository.save(interviewEntity);
         return interviewOnCreateDto;
+    }
+
+    @PostMapping("/{companyId}/interviews/{interviewId}/comments")
+    public CommentOnCreateDto addCommentToInterviewId(@PathVariable Integer companyId, @PathVariable Integer interviewId, @RequestBody CommentOnCreateDto commentOnCreateDto) {
+        Date date = new Date();
+        Timestamp timestamp2 = new Timestamp(date.getTime());
+
+        CommentEntity commentEntity = new CommentEntity();
+//        commentEntity.setUser(companyRepository.findCompanyEntityByCompanyId(companyId));
+        commentEntity.setText(commentOnCreateDto.getText());
+//        commentEntity.setTimestamp(timestamp2);
+        commentEntity.setInterviewEntity(interviewRepository.findInterviewEntityByInterviewId(interviewId));
+        commentRepository.save(commentEntity);
+        return commentOnCreateDto;
     }
 
 }

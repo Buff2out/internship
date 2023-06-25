@@ -29,32 +29,32 @@ public class PositionService {
 
 
    // public CreatePositionTypeDto createPosition(PositionEntity positionEntity){
-   public PositionEntity createPosition(CreatePositionTypeDto createPositionTypeDto){
-
-       List<Integer> companiesId = createPositionTypeDto.getCompaniesId();
-
-       PositionEntity posEntMap = positionsMapper.toPositionEntity(createPositionTypeDto); // лист ентетей позиций без компаний
-       List<CompanyEntity> allCompaniesList = new ArrayList<>();
-        for(Integer i : companiesId){
-            CompanyEntity companyEntitiesList = companyRepository.findCompanyEntityByCompanyId(i);
-
-            allCompaniesList.add(companyEntitiesList);
-        }
-       posEntMap.setCompanies(allCompaniesList);
-
-       /*
-            List<CompanyEntity> companiesEntities = positionEntity.getCompanies();// лист наших представителей
-            List<Integer> companiesId = new ArrayList<>();
-            for(CompanyEntity companiesEntity : companiesEntities) {
-                int i = 0;
-                CompanyEntity firstCompany = companiesEntities.get(i);
-                Integer companyId =  firstCompany.getCompanyId();
-                companiesId.add(companyId); // ТОТ ЛИСТЫЙ, КОТОРЫЙ НАДО БУДЕТ ДОБАВИТЬ К МОЕЙ ДТОШКЕ С ПОЗИЦИЯМИ
-            }
-*/
-
-       return posEntMap;
-    }
+//   public PositionEntity createPosition(CreatePositionTypeDto createPositionTypeDto){
+//
+//       List<Integer> companiesId = createPositionTypeDto.getCompaniesId();
+//
+//       PositionEntity posEntMap = positionsMapper.toPositionEntity(createPositionTypeDto); // лист ентетей позиций без компаний
+//       List<CompanyEntity> allCompaniesList = new ArrayList<>();
+//        for(Integer i : companiesId){
+//            CompanyEntity companyEntitiesList = companyRepository.findCompanyEntityByCompanyId(i);
+//
+//            allCompaniesList.add(companyEntitiesList);
+//        }
+//       posEntMap.setCompanies(allCompaniesList);
+//
+//       /*
+//            List<CompanyEntity> companiesEntities = positionEntity.getCompanies();// лист наших представителей
+//            List<Integer> companiesId = new ArrayList<>();
+//            for(CompanyEntity companiesEntity : companiesEntities) {
+//                int i = 0;
+//                CompanyEntity firstCompany = companiesEntities.get(i);
+//                Integer companyId =  firstCompany.getCompanyId();
+//                companiesId.add(companyId); // ТОТ ЛИСТЫЙ, КОТОРЫЙ НАДО БУДЕТ ДОБАВИТЬ К МОЕЙ ДТОШКЕ С ПОЗИЦИЯМИ
+//            }
+//*/
+//
+//       return posEntMap;
+//    }
 
     public List<PositionsListDto> findAllPositions()
     {

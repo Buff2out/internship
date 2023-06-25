@@ -8,5 +8,5 @@ import java.util.List;
 public interface InterviewRepository extends JpaRepository<InterviewEntity, Integer> {
     List<InterviewEntity> findAll();
 
-
+    InterviewEntity findInterviewEntityByInterviewId(Integer interviewId);
 }

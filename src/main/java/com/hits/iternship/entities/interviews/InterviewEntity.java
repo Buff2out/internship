@@ -1,8 +1,6 @@
 package com.hits.iternship.entities.interviews;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hits.iternship.entities.comments.CommentEntity;
-import com.hits.iternship.entities.comments.AuthorEntity;
 import com.hits.iternship.entities.companies.CompanyEntity;
 import com.hits.iternship.entities.position.PositionEntity;
 import com.hits.iternship.entities.status.StatusEntity;
@@ -11,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data

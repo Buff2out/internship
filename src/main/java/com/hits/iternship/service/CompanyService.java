@@ -30,7 +30,7 @@ public class CompanyService {
 
 
 
-    public List<CompanyFullDto> findCompanyById(Integer companyId){ //хыхыхы, здесь я ищу всего единственное значение, но я не умею маппить ничего кроме листа, так что тут будет лист с единственным значением
+    public List<CompanyFullDto> findCompanyById(Integer companyId) { //хыхыхы, здесь я ищу всего единственное значение, но я не умею маппить ничего кроме листа, так что тут будет лист с единственным значением
 
 
 

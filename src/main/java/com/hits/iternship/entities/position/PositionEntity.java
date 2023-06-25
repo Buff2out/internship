@@ -18,6 +18,10 @@ public class PositionEntity {
 
     String name;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     int plan;
 
     int taken;
