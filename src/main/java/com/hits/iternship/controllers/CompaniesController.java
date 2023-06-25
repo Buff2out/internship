@@ -9,7 +9,7 @@ import com.hits.iternship.entities.comments.CommentEntity;
 import com.hits.iternship.entities.companies.CompanyEntity;
 import com.hits.iternship.entities.companies.RepresentativesEntity;
 import com.hits.iternship.entities.interviews.InterviewEntity;
-import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.entities.position.PositionCompanyEntity;
 import com.hits.iternship.entities.students.StudentEntity;
 import com.hits.iternship.repositories.*;
 import com.hits.iternship.service.CompanyService;
@@ -55,7 +55,7 @@ public class CompaniesController {
 
     private final StudentRepository studentRepository;
 
-    private final PositionRepository positionRepository;
+    private final PositionCompanyRepository positionCompanyRepository;
 
     private final InterviewRepository interviewRepository;
     private final CommentRepository commentRepository;
@@ -149,8 +149,8 @@ public class CompaniesController {
             }
             */
 
-            List<PositionEntity> position_list = temp_stud.getPositions();
-            for (PositionEntity temp2 : position_list
+            List<PositionCompanyEntity> position_list = temp_stud.getPositions();
+            for (PositionCompanyEntity temp2 : position_list
             ) {
 
                 //studentsIdFiltret.add();
@@ -205,14 +205,14 @@ public class CompaniesController {
     }
     @PostMapping("/{id}/position")
     public PositionCompanyAddNewDto addPosition(@PathVariable Integer id, @RequestBody PositionCompanyAddNewDto positionCompanyAddNewDto) {
-        PositionEntity positionEntity = new PositionEntity();
-        positionEntity.setName(positionCompanyAddNewDto.getPostionTypeId());
-        positionEntity.setPlan(positionCompanyAddNewDto.getPlan());
+        PositionCompanyEntity positionCompanyEntity = new PositionCompanyEntity();
+//        positionCompanyEntity.setName(positionCompanyAddNewDto.getPositionTypeId());
+        positionCompanyEntity.setPlan(positionCompanyAddNewDto.getPlan());
         List<CompanyEntity> companyEntities = new ArrayList<>();
         companyEntities.add(companyRepository.findCompanyEntityByCompanyId(id));
-        positionEntity.setCompanies(companyEntities);
-//        PositionEntity positionEntity = positionService.createPosition(positionCompanyAddNewDto);
-        positionRepository.save(positionEntity);
+        positionCompanyEntity.setCompanies(companyEntities);
+//        PositionCompanyEntity positionCompanyEntity = positionService.createPosition(positionCompanyAddNewDto);
+        positionCompanyRepository.save(positionCompanyEntity);
         return positionCompanyAddNewDto;
     }
 
@@ -221,7 +221,7 @@ public class CompaniesController {
     public InterviewOnCreateDto addInterview(@PathVariable Integer companyId, @PathVariable Integer positionId, @RequestBody InterviewOnCreateDto interviewOnCreateDto) {
         InterviewEntity interviewEntity = new InterviewEntity();
         interviewEntity.setCompany(companyRepository.findCompanyEntityByCompanyId(companyId));
-        interviewEntity.setPosition(positionRepository.findPositionEntityByPositionId(positionId));
+        interviewEntity.setPosition(positionCompanyRepository.findPositionEntityByPositionId(positionId));
         //System.out.println(interviewOnCreateDto.getStudentId());
         interviewEntity.setStudent(studentRepository.findStudentEntityByStudentId(interviewOnCreateDto.getStudentId()));
         //interviewEntity.setStatus(statusRepository.findStatusEntityByStatusId(2).getStatus());

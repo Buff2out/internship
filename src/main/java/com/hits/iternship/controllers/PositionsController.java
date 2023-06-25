@@ -1,9 +1,8 @@
 package com.hits.iternship.controllers;
 
-import com.hits.iternship.dto.companies.CompanyShortDto;
 import com.hits.iternship.dto.position.*;
-import com.hits.iternship.entities.companies.CompanyEntity;
 import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.repositories.PositionCompanyRepository;
 import com.hits.iternship.repositories.PositionRepository;
 import com.hits.iternship.service.CompanyService;
 import com.hits.iternship.service.PositionService;
@@ -24,14 +23,16 @@ public class PositionsController {
 
     private final CompanyService companyService;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
     private final PositionRepository positionRepository;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    private final PositionCompanyRepository positionCompanyRepository;
 //    @PostMapping("/addPostion")
-//    public PositionEntity addPosition(@RequestBody CreatePositionTypeDto createPositionTypeDtoEntity) {
+//    public PositionCompanyEntity addPosition(@RequestBody CreatePositionTypeDto createPositionTypeDtoEntity) {
 //
-//        PositionEntity positionEntity = positionService.createPosition(createPositionTypeDtoEntity);
+//        PositionCompanyEntity positionEntity = positionService.createPosition(createPositionTypeDtoEntity);
 //
-//        return positionRepository.save(positionEntity);
+//        return positionCompanyRepository.save(positionEntity);
 //    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,4 +66,15 @@ public class PositionsController {
         pos.setPositions(positionsListDtos);
         return pos;
     }
+    @PostMapping()
+    public List<PositionEntity> addNewPosition(@RequestBody PositionAddNewDto positionAddNewDto) {
+        PositionEntity positionEntity = new PositionEntity();
+        positionEntity.setName(positionAddNewDto.getName());
+        positionEntity.setPlan(0);
+        positionEntity.setTaken(0);
+        positionRepository.save(positionEntity);
+        List<PositionEntity> positionEntities =  positionRepository.findAll();
+        return positionEntities;
+    }
+
 }

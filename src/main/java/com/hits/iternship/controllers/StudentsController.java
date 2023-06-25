@@ -1,15 +1,11 @@
 package com.hits.iternship.controllers;
 
-import com.hits.iternship.dto.position.PlanTakenDto;
-import com.hits.iternship.dto.position.PositionsAllDto;
-import com.hits.iternship.dto.position.PositionsListDto;
 import com.hits.iternship.dto.students.StudentsListDto;
 import com.hits.iternship.entities.companies.CompanyEntity;
-import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.entities.position.PositionCompanyEntity;
 import com.hits.iternship.entities.status.StatusEntity;
 import com.hits.iternship.entities.students.StudentEntity;
 import com.hits.iternship.repositories.StudentRepository;
-import com.hits.iternship.service.CompanyService;
 import com.hits.iternship.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -51,7 +47,7 @@ public class StudentsController {
             {
                 int i = 0;
             }
-            List<PositionEntity> positionEntities = studentEntity.getPositions();
+            List<PositionCompanyEntity> positionEntities = studentEntity.getPositions();
             if(positionEntities != null)
             {
                 int i = 0;

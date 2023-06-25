@@ -10,31 +10,14 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "positions")
-public class PositionEntity {
+public class PositionCompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer positionId;
 
-
-    String name;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     int plan;
-
-    public void setPlan(int plan) {
-        this.plan = plan;
-    }
-
     int taken;
-
-    public void setTaken(int taken) {
-        this.taken = taken;
-    }
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "positionsId", referencedColumnName = "positionId")
     List<CompanyEntity> companies;

@@ -1,39 +1,35 @@
 package com.hits.iternship.service;
 
-import com.hits.iternship.dto.position.CreatePositionTypeDto;
-import com.hits.iternship.dto.position.PositionsAllDto;
 import com.hits.iternship.dto.position.PositionsListDto;
 import com.hits.iternship.dto.position.PositionsListForOneCompany;
 import com.hits.iternship.entities.companies.CompanyEntity;
-import com.hits.iternship.entities.companies.RepresentativesEntity;
-import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.entities.position.PositionCompanyEntity;
 import com.hits.iternship.mapper.PositionsMapper;
 import com.hits.iternship.repositories.CompanyRepository;
-import com.hits.iternship.repositories.PositionRepository;
+import com.hits.iternship.repositories.PositionCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PositionService {
 
-    private final PositionRepository positionRepository;
+    private final PositionCompanyRepository positionCompanyRepository;
 
     private final CompanyRepository companyRepository;
 
     private final PositionsMapper positionsMapper;
 
 
-   // public CreatePositionTypeDto createPosition(PositionEntity positionEntity){
-//   public PositionEntity createPosition(CreatePositionTypeDto createPositionTypeDto){
+   // public CreatePositionTypeDto createPosition(PositionCompanyEntity positionEntity){
+//   public PositionCompanyEntity createPosition(CreatePositionTypeDto createPositionTypeDto){
 //
 //       List<Integer> companiesId = createPositionTypeDto.getCompaniesId();
 //
-//       PositionEntity posEntMap = positionsMapper.toPositionEntity(createPositionTypeDto); // лист ентетей позиций без компаний
+//       PositionCompanyEntity posEntMap = positionsMapper.toPositionEntity(createPositionTypeDto); // лист ентетей позиций без компаний
 //       List<CompanyEntity> allCompaniesList = new ArrayList<>();
 //        for(Integer i : companiesId){
 //            CompanyEntity companyEntitiesList = companyRepository.findCompanyEntityByCompanyId(i);
@@ -58,10 +54,10 @@ public class PositionService {
 
     public List<PositionsListDto> findAllPositions()
     {
-        List<PositionEntity> AllPositionsEntities = positionRepository.findAll();
+        List<PositionCompanyEntity> AllPositionsEntities = positionCompanyRepository.findAll();
         List<PositionsListDto> positionsListDtos = new ArrayList<>();
-        for(PositionEntity positionEntity:AllPositionsEntities) {
-            positionsListDtos.add(positionsMapper.toPositionsListDto(positionEntity));
+        for(PositionCompanyEntity positionCompanyEntity :AllPositionsEntities) {
+            positionsListDtos.add(positionsMapper.toPositionsListDto(positionCompanyEntity));
         }
 
 
@@ -77,10 +73,10 @@ public class PositionService {
 
 
 
-        List<PositionEntity> positionsEntities = positionRepository.findPositionEntitiesByCompanies(companyEntity); //позиции вычесленные по айди компании - а именно позиции компании
+        List<PositionCompanyEntity> positionsEntities = positionCompanyRepository.findPositionEntitiesByCompanies(companyEntity); //позиции вычесленные по айди компании - а именно позиции компании
         List<PositionsListForOneCompany> positionsListDtos = new ArrayList<>();
-        for(PositionEntity positionEntity:positionsEntities) {
-            positionsListDtos.add(positionsMapper.toPositionsListForOneCompany(positionEntity));
+        for(PositionCompanyEntity positionCompanyEntity :positionsEntities) {
+            positionsListDtos.add(positionsMapper.toPositionsListForOneCompany(positionCompanyEntity));
         }
         /*
         List<PositionsListForOneCompany> positionsListForOneCompanies = new ArrayList<>();

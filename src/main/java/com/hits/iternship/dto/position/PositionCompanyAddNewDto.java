@@ -1,10 +1,10 @@
 package com.hits.iternship.dto.position;
 
 public class PositionCompanyAddNewDto {
-    Integer postionTypeId;
+    Integer positionTypeId;
 
-    public String getPostionTypeId() {
-        return postionTypeId;
+    public Integer getPositionTypeId() {
+        return positionTypeId;
     }
 
     Integer plan;

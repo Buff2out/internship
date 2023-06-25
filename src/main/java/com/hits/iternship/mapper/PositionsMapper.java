@@ -1,12 +1,10 @@
 package com.hits.iternship.mapper;
 
-import com.hits.iternship.dto.companies.CompanyShortDto;
 import com.hits.iternship.dto.position.CreatePositionTypeDto;
 import com.hits.iternship.dto.position.PositionsListDto;
 import com.hits.iternship.dto.position.PositionsListForOneCompany;
 import com.hits.iternship.dto.position.PositionsTypesAllDto;
-import com.hits.iternship.entities.companies.CompanyEntity;
-import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.entities.position.PositionCompanyEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -18,32 +16,32 @@ import java.util.Objects;
 public class PositionsMapper {
     private final ModelMapper modelMapper;
 
-    public PositionsTypesAllDto toPositionsTypesAllDto(PositionEntity positionEntity) {
-        return Objects.isNull(positionEntity) ? null :
-                modelMapper.map(positionEntity, PositionsTypesAllDto.class);
+    public PositionsTypesAllDto toPositionsTypesAllDto(PositionCompanyEntity positionCompanyEntity) {
+        return Objects.isNull(positionCompanyEntity) ? null :
+                modelMapper.map(positionCompanyEntity, PositionsTypesAllDto.class);
     }
 
 
-    public CreatePositionTypeDto toCreatePositionTypeDto(PositionEntity positionEntity) {
-        return Objects.isNull(positionEntity) ? null :
-                modelMapper.map(positionEntity, CreatePositionTypeDto.class);
+    public CreatePositionTypeDto toCreatePositionTypeDto(PositionCompanyEntity positionCompanyEntity) {
+        return Objects.isNull(positionCompanyEntity) ? null :
+                modelMapper.map(positionCompanyEntity, CreatePositionTypeDto.class);
     }
 
-    public PositionEntity toPositionEntity(CreatePositionTypeDto createPositionTypeDto) {
+    public PositionCompanyEntity toPositionEntity(CreatePositionTypeDto createPositionTypeDto) {
         return Objects.isNull(createPositionTypeDto) ? null :
-                modelMapper.map(createPositionTypeDto, PositionEntity.class);
+                modelMapper.map(createPositionTypeDto, PositionCompanyEntity.class);
     }
 
-    public PositionsListDto toPositionsListDto(PositionEntity positionEntity)
+    public PositionsListDto toPositionsListDto(PositionCompanyEntity positionCompanyEntity)
     {
-        return Objects.isNull(positionEntity) ? null :
-                modelMapper.map(positionEntity, PositionsListDto.class);
+        return Objects.isNull(positionCompanyEntity) ? null :
+                modelMapper.map(positionCompanyEntity, PositionsListDto.class);
     }
 
-    public PositionsListForOneCompany toPositionsListForOneCompany(PositionEntity positionEntity)
+    public PositionsListForOneCompany toPositionsListForOneCompany(PositionCompanyEntity positionCompanyEntity)
     {
-        return Objects.isNull(positionEntity) ? null :
-                modelMapper.map(positionEntity, PositionsListForOneCompany.class);
+        return Objects.isNull(positionCompanyEntity) ? null :
+                modelMapper.map(positionCompanyEntity, PositionsListForOneCompany.class);
     }
 
 

@@ -2,7 +2,7 @@ package com.hits.iternship.entities.interviews;
 
 import com.hits.iternship.entities.comments.CommentEntity;
 import com.hits.iternship.entities.companies.CompanyEntity;
-import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.entities.position.PositionCompanyEntity;
 import com.hits.iternship.entities.status.StatusEntity;
 import com.hits.iternship.entities.students.StudentEntity;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ public class InterviewEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "positionId", referencedColumnName = "positionId")
-    PositionEntity position;
+    PositionCompanyEntity position;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")

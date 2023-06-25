@@ -2,13 +2,11 @@ package com.hits.iternship.mapper;
 
 import com.hits.iternship.dto.StatusDto;
 import com.hits.iternship.dto.companies.CompaniesStudentShortDto;
-import com.hits.iternship.dto.contacts.ContactsShortDto;
 import com.hits.iternship.dto.position.PositionStudentShortDto;
-import com.hits.iternship.dto.position.PositionsTypesAllDto;
 import com.hits.iternship.dto.students.StudentsListDto;
 import com.hits.iternship.dto.students.StudentsShortDto;
 import com.hits.iternship.entities.companies.CompanyEntity;
-import com.hits.iternship.entities.position.PositionEntity;
+import com.hits.iternship.entities.position.PositionCompanyEntity;
 import com.hits.iternship.entities.status.StatusEntity;
 import com.hits.iternship.entities.students.StudentEntity;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -62,8 +59,8 @@ public class StudentsMapper {
 
 
 
-            List<PositionEntity> oneStudentPositionList = studentEntity.getPositions();
-            for(PositionEntity positionEntity: oneStudentPositionList)
+            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositions();
+            for(PositionCompanyEntity positionEntity: oneStudentPositionList)
             {
 
                 PositionStudentShortDto firstPositionStudentShortDto = modelMapper.map(positionEntity, PositionStudentShortDto.class);
@@ -133,11 +130,11 @@ public class StudentsMapper {
 
 
             List<PositionStudentShortDto> studentPositionList = new ArrayList<>();
-            List<PositionEntity> oneStudentPositionList = studentEntity.getPositions();
-            for(PositionEntity positionEntity: oneStudentPositionList)
+            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositions();
+            for(PositionCompanyEntity positionCompanyEntity : oneStudentPositionList)
             {
 
-                PositionStudentShortDto firstPositionStudentShortDto = modelMapper.map(positionEntity, PositionStudentShortDto.class);
+                PositionStudentShortDto firstPositionStudentShortDto = modelMapper.map(positionCompanyEntity, PositionStudentShortDto.class);
                 studentPositionList.add(firstPositionStudentShortDto);
 
                 //studentsListDto = modelMapper.map(studentEntity, StudentsListDto.class);
