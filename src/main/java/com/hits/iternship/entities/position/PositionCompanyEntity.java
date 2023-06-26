@@ -32,6 +32,10 @@ public class PositionCompanyEntity {
     @JoinColumn(name = "companyId", referencedColumnName = "companyId")
     CompanyEntity companyEntity;
 
+    public CompanyEntity getCompanyEntity() {
+        return companyEntity;
+    }
+
     public void setCompany(CompanyEntity companyEntity) {
         this.companyEntity = companyEntity;
     }
@@ -41,7 +45,7 @@ public class PositionCompanyEntity {
     List<StudentEntity> students;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
+    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
     PositionEntity positionEntity;
 
     public void setPositionEntity(PositionEntity positionEntity) {

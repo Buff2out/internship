@@ -43,8 +43,11 @@ public class PositionEntity {
 //    @JoinColumn(name = "positionsId", referencedColumnName = "positionId")
 //    List<StudentEntity> students;
 
-    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
-    List<PositionCompanyEntity> positionCompanyEntities;
+//    @OneToMany(fetch = FetchType.LAZY)
+////    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
+//    List<PositionCompanyEntity> positionCompanyEntities;
 
+//    public List<PositionCompanyEntity> getPositionCompanyEntities() {
+//        return positionCompanyEntities;
+//    }
 }
