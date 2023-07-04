@@ -10,5 +10,9 @@ public class PositionsAllFonOneCompanyDto {
 
     Integer taken;
 
-    List<PositionsListForOneCompany> positions;
+    List<PositionsListForOneCompany> positionsListForOneCompany;
+
+    public void setPositionsListForOneCompany(List<PositionsListForOneCompany> positionsListForOneCompany) {
+        this.positionsListForOneCompany = positionsListForOneCompany;
+    }
 }

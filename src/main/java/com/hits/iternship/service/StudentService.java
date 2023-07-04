@@ -25,16 +25,16 @@ public class StudentService {
         return studentsMapper.toStudentsListDto(studentEntityList);
     }
 
-    public List<StudentsShortDto> findAllShortStudents()
-    {
-        List<StudentEntity> studentEntityList = studentRepository.findAll();
-        return studentsMapper.toStudentsShortDto(studentEntityList);
-    }
-
-    public StudentsShortDto findShortStudents(StudentEntity studentEntity)
-    {
-        return studentsMapper.toOneStudentsShortsDto(studentEntity);
-    }
+//    public List<StudentsShortDto> findAllShortStudents()
+//    {
+//        List<StudentEntity> studentEntityList = studentRepository.findAll();
+//        return studentsMapper.toStudentsShortDto(studentEntityList);
+//    }
+//
+//    public StudentsShortDto findShortStudents(StudentEntity studentEntity)
+//    {
+//        return studentsMapper.toOneStudentsShortsDto(studentEntity);
+//    }
 
 
 

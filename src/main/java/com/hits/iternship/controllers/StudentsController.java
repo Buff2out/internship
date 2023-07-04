@@ -1,6 +1,7 @@
 package com.hits.iternship.controllers;
 
 import com.hits.iternship.dto.students.StudentsListDto;
+import com.hits.iternship.dto.students.StudentAddNewDto;
 import com.hits.iternship.entities.companies.CompanyEntity;
 import com.hits.iternship.entities.position.PositionCompanyEntity;
 import com.hits.iternship.entities.status.StatusEntity;
@@ -30,6 +31,13 @@ public class StudentsController {
         return studentService.findAllStudents();
 
     }
+    @PostMapping()
+    public StudentAddNewDto addStudent(@RequestBody StudentAddNewDto studentAddNewDto) {
+        StudentEntity studentEntity = new StudentEntity();
+        studentEntity.setName(studentAddNewDto.getName());
+        studentRepository.save(studentEntity);
+        return studentAddNewDto;
+    }
 
     @GetMapping("/test")
     public String getTest() {
@@ -47,7 +55,7 @@ public class StudentsController {
             {
                 int i = 0;
             }
-            List<PositionCompanyEntity> positionEntities = studentEntity.getPositions();
+            List<PositionCompanyEntity> positionEntities = studentEntity.getPositionCompanyEntities();
             if(positionEntities != null)
             {
                 int i = 0;

@@ -1,5 +1,6 @@
 package com.hits.iternship.controllers;
 
+import com.hits.iternship.dto.StatusDto;
 import com.hits.iternship.dto.comments.CommentOnCreateDto;
 import com.hits.iternship.dto.companies.CompanyShortDto;
 import com.hits.iternship.dto.interview.InterviewOnCreateDto;
@@ -119,7 +120,63 @@ public class CompaniesController {
         return companyRepository.findCompanyEntityByCompanyId(companyId);
     }
 
-//    @GetMapping("/{companyId}/positions")
+    @GetMapping("/{companyId}/positions")
+    public PositionsAllFonOneCompanyDto getAllPositionsOfCompany(@PathVariable Integer companyId) {
+//        List<PositionCompanyEntity> positionCompanyEntities = positionCompanyRepository.findPositionCompanyEntitiesByCompanyEntity(companyRepository.findCompanyEntityByCompanyId(companyId));
+        List<PositionCompanyEntity> positionCompanyEntities = positionCompanyRepository.findPositionCompanyEntitiesByCompanyEntity(companyRepository.findCompanyEntityByCompanyId(companyId));
+        List<PositionsListForOneCompany> positionsListForOneCompany = new ArrayList<>();
+        PositionsAllFonOneCompanyDto positionsAllFonOneCompanyDto = new PositionsAllFonOneCompanyDto();
+        for (int i = 0; i < positionCompanyEntities.size(); i++) {
+//            StudentEntity studentEntity =  positionCompanyRepository.findStudentEntitiesByPositionCompanyId(i+1);
+//            PositionCompanyEntity positionCompanyEntity = positionCompanyRepository.findPositionCompanyEntityByPositionCompanyId(i+1);
+            List<StudentEntity> studentEntities = studentRepository.findStudentEntitiesByPositionCompanyEntitiesPostitionCompanyEntity(positionCompanyEntities.get(i));
+//            System.out.println(positionCompanyEntity);
+            System.out.println("_________studentEntities_________");
+            // WARNING
+//            System.out.println(studentEntities);
+//            System.out.println("_________positionEntities.get(i)_________");
+//            System.out.println((positionEntities.get(i)));
+//            System.out.println("_________(positionEntities.get(i)).getPositionCompanyEntities()_________");
+//            System.out.println((positionEntities.get(i)).getPositionCompanyEntities());
+            PositionsListForOneCompany positionListForOneCompany = new PositionsListForOneCompany();
+            List<StudentsShortDto> studentsShortDtos = new ArrayList<>();
+            for (int j = 0; j < studentEntities.size(); j++) {
+//                CompanyEntity companyEntity = (positionCompanyEntities.get(j)).getCompanyEntity();
+                StudentsShortDto studentsShortDto = new StudentsShortDto();
+                studentsShortDto.setStudentId((studentEntities.get(j)).getStudentId());
+                studentsShortDto.setName((studentEntities.get(j)).getName());
+//                Integer studentId;
+//                String name;
+//                StatusDto status;
+//                Date lastActivity;
+                studentsShortDtos.add(studentsShortDto);
+
+                // CompanyShortDtos.push_back(CompanyShortDto)
+            }
+
+//            Integer positionId;
+//            String name;
+//            Integer plan;
+//            Integer taken;
+//            List<StudentsShortDto> students;
+            positionListForOneCompany.setPositionId((positionCompanyEntities.get(i)).getPositionCompanyId());
+            PositionEntity positionEntity = positionCompanyRepository.findPositionEntityByPositionCompanyId((positionCompanyEntities.get(i)).getPositionCompanyId());
+
+            positionListForOneCompany.setName(positionEntity.getName());
+            positionListForOneCompany.setPositionTypeId(positionEntity.getPositionId());
+            positionListForOneCompany.setStudents(studentsShortDtos);
+            positionListForOneCompany.setPlan(0);
+            positionListForOneCompany.setTaken(0);
+            positionsListForOneCompany.add(positionListForOneCompany);
+            // positionsListDtos.push_back(CompanyShortDtos)
+            // WARNING
+        }
+        positionsAllFonOneCompanyDto.setPlan(0);
+        positionsAllFonOneCompanyDto.setTaken(0);
+        positionsAllFonOneCompanyDto.setPositionsListForOneCompany(positionsListForOneCompany);
+        // приравняем к positionsAllDto.positions = positionsListDtos;
+        return positionsAllFonOneCompanyDto;
+    }
 //    //public PositionsAllFonOneCompanyDto getPositionsForOneCompany(@PathVariable Integer companyId) {
 //    public PositionsAllFonOneCompanyDto getPositionsForOneCompany(@PathVariable Integer companyId) {
 ////        List<StudentEntity> studentEntityList = studentRepository.findAll();
@@ -151,7 +208,7 @@ public class CompaniesController {
 ////            }
 ////            */
 ////
-////            List<PositionCompanyEntity> position_list = temp_stud.getPositions();
+////            List<PositionCompanyEntity> position_list = temp_stud.getPositionCompanyEntities();
 ////            for (PositionCompanyEntity temp2 : position_list
 ////            ) {
 ////
@@ -195,7 +252,7 @@ public class CompaniesController {
 ////        PositionsAllFonOneCompanyDto pos = new PositionsAllFonOneCompanyDto();
 ////        pos.setPlan(15);
 ////        pos.setTaken(5);
-////        pos.setPositions(positionsListDtos);
+////        pos.setPositionCompanyEntities(positionsListDtos);
 ////        //pos.set
 /////*
 ////        PositionsAllFonOneCompanyDto positionsAllFonOneCompanyDto = new PositionsAllFonOneCompanyDto();

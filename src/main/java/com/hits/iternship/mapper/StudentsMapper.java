@@ -59,7 +59,7 @@ public class StudentsMapper {
 
 
 
-            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositions();
+            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositionCompanyEntities();
             for(PositionCompanyEntity positionEntity: oneStudentPositionList)
             {
 
@@ -67,7 +67,7 @@ public class StudentsMapper {
                 studentPositionList.add(firstPositionStudentShortDto);
 
                 studentsListDto = modelMapper.map(studentEntity, StudentsListDto.class);
-                studentsListDto.setPositions(studentPositionList);
+                studentsListDto.setPositionCompanyEntities(studentPositionList);
 
                 studentsListDtoLAST = studentsListDto;
 
@@ -77,7 +77,7 @@ public class StudentsMapper {
 
             studentsListDto = modelMapper.map(studentEntity, StudentsListDto.class); // здесь 1 зампаленный студент
             studentsListDto.setCompanies(companiesStudentShortDtoList);
-            studentsListDto.setPositions(studentPositionList);
+            studentsListDto.setPositionCompanyEntities(studentPositionList);
             //   studentsListDto.setStatus(statusDtoAll);
            // ТУТ ВКОРЯЧИТЬ ЗАВЕРШЕНИЕ СТРОЧНОГО КОММЕНТА ()
 
@@ -130,7 +130,7 @@ public class StudentsMapper {
 
 
             List<PositionStudentShortDto> studentPositionList = new ArrayList<>();
-            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositions();
+            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositionCompanyEntities();
             for(PositionCompanyEntity positionCompanyEntity : oneStudentPositionList)
             {
 
@@ -149,7 +149,7 @@ public class StudentsMapper {
 
             studentsListDto = modelMapper.map(studentEntity, StudentsListDto.class); // здесь 1 зампаленный студент
             studentsListDto.setCompanies(companiesStudentShortDtoList);
-            studentsListDto.setPositions(studentPositionList);
+            studentsListDto.setPositionCompanyEntities(studentPositionList);
             //   studentsListDto.setStatus(statusDtoAll);
             */
 

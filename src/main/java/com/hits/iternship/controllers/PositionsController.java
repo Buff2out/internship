@@ -56,7 +56,7 @@ public class PositionsController {
 //        pos.setPlan(50);
 //        pos.setTaken(20);
 //
-//        pos.setPositions(positionsListDtos);
+//        pos.setPositionCompanyEntities(positionsListDtos);
 //        return pos;
 //    }
     @GetMapping()
@@ -66,8 +66,8 @@ public class PositionsController {
         PositionsAllDto positionsAllDto = new PositionsAllDto();
         for (int i = 0; i < positionEntities.size(); i++) {
             List<PositionCompanyEntity> positionCompanyEntities = positionCompanyRepository.findPositionCompanyEntitiesByPositionEntity((positionEntities.get(i)));
-            System.out.println("_________positionCompanyEntities_________");
-            System.out.println(positionCompanyEntities);
+//            System.out.println("_________positionCompanyEntities_________");
+//            System.out.println(positionCompanyEntities);
 //            System.out.println("_________positionEntities.get(i)_________");
 //            System.out.println((positionEntities.get(i)));
 //            System.out.println("_________(positionEntities.get(i)).getPositionCompanyEntities()_________");

@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class PositionsListForOneCompany {
     Integer positionId;
+    Integer positionTypeId;
     String name;
     Integer plan;
     Integer taken;

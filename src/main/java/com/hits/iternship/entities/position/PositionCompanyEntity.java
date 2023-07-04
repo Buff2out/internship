@@ -41,7 +41,7 @@ public class PositionCompanyEntity {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "studentsId", referencedColumnName = "studentsId")
+    @JoinColumn(name = "studentId", referencedColumnName = "studentId")
     List<StudentEntity> students;
 
     @ManyToOne(fetch = FetchType.LAZY)
