@@ -40,9 +40,9 @@ public class PositionCompanyEntity {
         this.companyEntity = companyEntity;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "studentId", referencedColumnName = "studentId")
-    List<StudentEntity> students;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "studentId", referencedColumnName = "studentId")
+//    List<StudentEntity> students;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "positionId", referencedColumnName = "positionId")

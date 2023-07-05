@@ -39,37 +39,37 @@ public class StudentsController {
         return studentAddNewDto;
     }
 
-    @GetMapping("/test")
-    public String getTest() {
-
-        List<StudentEntity> studentEntityList = studentRepository.findAll();
-        for(StudentEntity studentEntity: studentEntityList)
-        {
-            StatusEntity status = studentEntity.getStatus();
-            if(status != null)
-            {
-                int i = 0;
-            }
-            List<CompanyEntity> company =  studentEntity.getCompanies();
-            if(company != null)
-            {
-                int i = 0;
-            }
-            List<PositionCompanyEntity> positionEntities = studentEntity.getPositionCompanyEntities();
-            if(positionEntities != null)
-            {
-                int i = 0;
-            }
-
-            studentEntity.getName();
-        }
-        if(studentEntityList != null) {
-            return "ok";
-        }else{
-            return "not ok";
-        }
-
-
-    }
+//    @GetMapping("/test")
+//    public String getTest() {
+//
+//        List<StudentEntity> studentEntityList = studentRepository.findAll();
+//        for(StudentEntity studentEntity: studentEntityList)
+//        {
+//            StatusEntity status = studentEntity.getStatus();
+//            if(status != null)
+//            {
+//                int i = 0;
+//            }
+//            List<CompanyEntity> company =  studentEntity.getCompanies();
+//            if(company != null)
+//            {
+//                int i = 0;
+//            }
+//            List<PositionCompanyEntity> positionEntities = studentEntity.getPositionCompanyEntities();
+//            if(positionEntities != null)
+//            {
+//                int i = 0;
+//            }
+//
+//            studentEntity.getName();
+//        }
+//        if(studentEntityList != null) {
+//            return "ok";
+//        }else{
+//            return "not ok";
+//        }
+//
+//
+//    }
 
 }

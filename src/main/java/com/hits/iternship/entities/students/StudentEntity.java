@@ -36,9 +36,9 @@ public class StudentEntity {
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
     StatusEntity status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "positionCompanyId", referencedColumnName = "positionCompanyId") //Один студент может пробовать себя во многих компаниях, но вот по итогу работать будет только в одной. Да и вообще в компаниях мы не отображаем студентов, так что тут оне ту мени
-    List<PositionCompanyEntity> positionCompanyEntities;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "positionCompanyId", referencedColumnName = "positionCompanyId") //Один студент может пробовать себя во многих компаниях, но вот по итогу работать будет только в одной. Да и вообще в компаниях мы не отображаем студентов, так что тут оне ту мени
+//    List<PositionCompanyEntity> positionCompanyEntities;
 
 
     /////////////////////////////////////////////

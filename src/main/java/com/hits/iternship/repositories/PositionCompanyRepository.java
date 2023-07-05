@@ -20,9 +20,9 @@ public interface PositionCompanyRepository extends JpaRepository<PositionCompany
     List<PositionCompanyEntity> findPositionCompanyEntitiesByPositionEntity(PositionEntity positionEntity);
     PositionEntity findPositionEntityByPositionCompanyId(Integer positionId);
 
-    List<StudentEntity> findStudentEntitiesByPositionCompanyId(Integer positionId);
-
-    List<StudentEntity> findStudentEntitiesByPositionCompanyEntity(PositionCompanyEntity positionCompanyEntity);
+//    List<StudentEntity> findStudentEntitiesByPositionCompanyId(Integer positionId);
+//
+//    List<StudentEntity> findStudentEntitiesByPositionCompanyEntity(PositionCompanyEntity positionCompanyEntity);
 
 //    List<StudentEntity> findStudentEntitiesByPositionCompanyId(Integer positionId);
 

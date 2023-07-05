@@ -17,6 +17,7 @@ import com.hits.iternship.repositories.*;
 import com.hits.iternship.service.CompanyService;
 //import com.hits.iternship.service.PositionService;
 import com.hits.iternship.service.StudentService;
+import jakarta.persistence.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Validated
 @RestController
@@ -129,9 +131,16 @@ public class CompaniesController {
         for (int i = 0; i < positionCompanyEntities.size(); i++) {
 //            StudentEntity studentEntity =  positionCompanyRepository.findStudentEntitiesByPositionCompanyId(i+1);
 //            PositionCompanyEntity positionCompanyEntity = positionCompanyRepository.findPositionCompanyEntityByPositionCompanyId(i+1);
-            List<StudentEntity> studentEntities = studentRepository.findStudentEntitiesByPositionCompanyEntitiesPostitionCompanyEntity(positionCompanyEntities.get(i));
+            List<Tuple> studentTuples = studentRepository.findStudentEntitiesByPosId(i+1);
+            List<StudentsShortDto> studentsShortDtos = studentTuples.stream()
+                    .map(t -> new StudentsShortDto(
+                            t.get(0, Integer.class),
+                            t.get(1, String.class),
+                            t.get(2, String.class),
+                            t.get(3, Date.class)
+                    ))
+                    .collect(Collectors.toList());
 //            System.out.println(positionCompanyEntity);
-            System.out.println("_________studentEntities_________");
             // WARNING
 //            System.out.println(studentEntities);
 //            System.out.println("_________positionEntities.get(i)_________");
@@ -139,20 +148,20 @@ public class CompaniesController {
 //            System.out.println("_________(positionEntities.get(i)).getPositionCompanyEntities()_________");
 //            System.out.println((positionEntities.get(i)).getPositionCompanyEntities());
             PositionsListForOneCompany positionListForOneCompany = new PositionsListForOneCompany();
-            List<StudentsShortDto> studentsShortDtos = new ArrayList<>();
-            for (int j = 0; j < studentEntities.size(); j++) {
-//                CompanyEntity companyEntity = (positionCompanyEntities.get(j)).getCompanyEntity();
-                StudentsShortDto studentsShortDto = new StudentsShortDto();
-                studentsShortDto.setStudentId((studentEntities.get(j)).getStudentId());
-                studentsShortDto.setName((studentEntities.get(j)).getName());
-//                Integer studentId;
-//                String name;
-//                StatusDto status;
-//                Date lastActivity;
-                studentsShortDtos.add(studentsShortDto);
-
-                // CompanyShortDtos.push_back(CompanyShortDto)
-            }
+//            List<StudentsShortDto> studentsShortDtos = new ArrayList<>();
+//            for (int j = 0; j < studentEntities.size(); j++) {
+////                CompanyEntity companyEntity = (positionCompanyEntities.get(j)).getCompanyEntity();
+//                StudentsShortDto studentsShortDto = new StudentsShortDto();
+//                studentsShortDto.setStudentId((studentEntities.get(j)).getStudentId());
+//                studentsShortDto.setName((studentEntities.get(j)).getName());
+////                Integer studentId;
+////                String name;
+////                StatusDto status;
+////                Date lastActivity;
+//                studentsShortDtos.add(studentsShortDto);
+//
+//                // CompanyShortDtos.push_back(CompanyShortDto)
+//            }
 
 //            Integer positionId;
 //            String name;
@@ -160,7 +169,7 @@ public class CompaniesController {
 //            Integer taken;
 //            List<StudentsShortDto> students;
             positionListForOneCompany.setPositionId((positionCompanyEntities.get(i)).getPositionCompanyId());
-            PositionEntity positionEntity = positionCompanyRepository.findPositionEntityByPositionCompanyId((positionCompanyEntities.get(i)).getPositionCompanyId());
+            PositionEntity positionEntity = (positionCompanyEntities.get(i)).getPositionEntity();
 
             positionListForOneCompany.setName(positionEntity.getName());
             positionListForOneCompany.setPositionTypeId(positionEntity.getPositionId());

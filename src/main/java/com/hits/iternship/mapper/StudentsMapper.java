@@ -129,21 +129,21 @@ public class StudentsMapper {
             studentsListDto.setCompanies(companiesStudentShortDtoList);
 
 
-            List<PositionStudentShortDto> studentPositionList = new ArrayList<>();
-            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositionCompanyEntities();
-            for(PositionCompanyEntity positionCompanyEntity : oneStudentPositionList)
-            {
-
-                PositionStudentShortDto firstPositionStudentShortDto = modelMapper.map(positionCompanyEntity, PositionStudentShortDto.class);
-                studentPositionList.add(firstPositionStudentShortDto);
-
-                //studentsListDto = modelMapper.map(studentEntity, StudentsListDto.class);
-
-
-                studentsListDtoLAST = studentsListDto;
-
-            }
-            studentsListDto.setPositions(studentPositionList);
+//            List<PositionStudentShortDto> studentPositionList = new ArrayList<>();
+//            List<PositionCompanyEntity> oneStudentPositionList = studentEntity.getPositionCompanyEntities();
+//            for(PositionCompanyEntity positionCompanyEntity : oneStudentPositionList)
+//            {
+//
+//                PositionStudentShortDto firstPositionStudentShortDto = modelMapper.map(positionCompanyEntity, PositionStudentShortDto.class);
+//                studentPositionList.add(firstPositionStudentShortDto);
+//
+//                //studentsListDto = modelMapper.map(studentEntity, StudentsListDto.class);
+//
+//
+//                studentsListDtoLAST = studentsListDto;
+//
+//            }
+//            studentsListDto.setPositions(studentPositionList);
 
             /*
 
